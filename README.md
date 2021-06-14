@@ -1,6 +1,8 @@
-## ENPM661 Project1
+## 15 puzzle problem
 
-# 15 puzzle problem
+<p align="center">
+<img src="data/15solver.gif"/>
+</p>
 
 # Generate final state from given state
 
