@@ -271,3 +271,30 @@ if __name__ == '__main__':
     #back trace
     track = backTrace(backTrack)
 
+    # print the trace and goal state ; save it in a file
+    try:
+        fout = open(args.case + '_back_trace_.txt', 'w')
+    except:
+        print('File can not be opened')
+    print('\n')
+    for i in range(len(track)):
+        # print on terminal
+        print(track[i].parent_arr)
+        print('Move ',track[i].move, '\n')
+        # write in a file
+        fout.write('%s\n' %track[i].parent_arr)
+        fout.write('Move %s\n\n' %track[i].move)
+    print('Final: \n',track[-1].arr)
+    fout.write('Final\n%s\n'%track[-1].arr)
+    fout.close()
+
+    # store all traversed nodes in file
+    try:
+        fout = open(args.case + '_nodes.txt', 'w')
+    except:
+        print('File can not be opened')
+        exit()
+    for line in mainList:
+        fout.write('%s\n' %line)
+    fout.close()
+
