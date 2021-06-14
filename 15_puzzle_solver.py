@@ -224,3 +224,16 @@ def path(inital):
     # return the main node list and back track list
     return mainList, backTrack
 
+# function to back trace the parent node from goal state
+def backTrace(backTrack):
+    track, parent_state, last_parent_index  = [], [], -1
+    for i in reversed(range(len(backTrack))):
+        if last_parent_index == backTrack[i].parent_index:
+            continue
+        if backTrack[i].list == final or backTrack[i].list == parent_state:
+            last_parent_index = backTrack[i].parent_index
+            parent_state = backTrack[i].parent_state
+            track.insert(0,backTrack[i])
+
+    # return the list of back tracked parents
+    return track
