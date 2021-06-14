@@ -27,9 +27,13 @@ eg. To run test case 5:
 python3 15_puzzle_solver.py --case test5
 
 Same applies to other cases:
+
 python3 15_puzzle_solver.py --case test1
+
 python3 15_puzzle_solver.py --case test2
+
 python3 15_puzzle_solver.py --case test3
+
 python3 15_puzzle_solver.py --case test4
 
 # Output:
