@@ -58,3 +58,19 @@ class Node:
         self.parent_state = parent_state # parent list/state form
         self.move = ''
 
+    # store the index of the blank / zero block to find the moves
+    def set_blank_index(self, i, j):
+        self.i = i
+        self.j = j
+
+    # make list of character values from current child array
+    def make_list(self):
+        if (len(self.arr) > 0):
+            a = self.arr.ravel()
+            for i in a:
+                self.list.append(i)
+
+    # print the child list
+    def print_list(self):
+        print(self.list)
+
