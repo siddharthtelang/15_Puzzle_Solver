@@ -153,3 +153,74 @@ def path(inital):
     # define a list to back trace the goal state. This will hold all the object of nodes traversed
     backTrack = []
 
+    print('Nodes derived from above parent till goal state:\n')
+    # iterate till the main queue is not empty - till all nodes are traversed
+    while(mainQueue.not_empty()):
+        # deque top element
+        list_node = mainQueue.deque()
+        #print('\nDeque:')
+        #print(list_node)
+        arr = np.reshape(list_node, (4,4))
+        # find the blank tile
+        i, j = find_blank(arr)
+        # create a parent node
+        parent = Node(arr, count, list_node)
+        # store the 1st parent node in back track list
+        if count == 0:
+            backTrack.append(parent)
+        count += 1
+
+        # fill in the parent node with blank tile coordinates for reference
+        parent.set_blank_index(i,j)
+        # find the moves that can be achieved from parent node
+        moves = find_moves(i,j, parent)
+        #print(moves)
+
+        # iterate through each move and generate child array with actions - left, right, up, down
+        for m in range(len(moves)):
+            # child object stores array which will be modified with actions, count of parent index and parent list
+            child = Node(arr, count, list_node)
+            if (moves[m] == 'left'):
+                child.arr = ActionMoveLeft(copy.deepcopy(parent))
+            elif (moves[m] == 'right'):
+                child.arr = ActionMoveRight(copy.deepcopy(parent))
+            elif (moves[m] == 'up'):
+                child.arr = ActionMoveUp(copy.deepcopy(parent))
+            else:
+                child.arr = ActionMoveDown(copy.deepcopy(parent))
+
+            # create a list of child array
+            child.make_list()
+
+            # store the move
+            child.move = moves[m]
+
+            # if list is not in the main list add those details in main list and further add in database
+            if (child.list not in mainList):
+                child.print_list()
+                # add object in back tracking list ; add child list in main list
+                backTrack.append(child)
+                mainList.append(child.list)
+
+                # if child.list equals final list -> We have arrived at our solution
+                if (child.list == final):
+                    print('\nGot the final state\n')
+                    print(child.list)
+                    print(child.arr)
+                    flag = 1
+                    break
+
+                # if goal is not reached, add child list to queue to be expanded
+                mainQueue.enque(child.list)
+
+        # if goal state is reached, display and break out
+        if (flag == 1):
+            #print('\n Main Node List = ')
+            #print(mainList)
+            print('\nLength of main node list = ' + str(len(mainList)))
+            print('count of node expansions = ' + str(count))
+            break
+
+    # return the main node list and back track list
+    return mainList, backTrack
+
