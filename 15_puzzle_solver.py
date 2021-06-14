@@ -74,3 +74,17 @@ class Node:
     def print_list(self):
         print(self.list)
 
+# function to find the moves from the parent node
+def find_moves(i, j, parent):
+    moves = ['up', 'down', 'left', 'right']
+    boundary = parent.arr.shape[0]
+    if (j == 0):
+        moves.remove('left')
+    if (j == boundary-1):
+        moves.remove('right')
+    if (i == 0):
+        moves.remove('up')
+    if (i == boundary-1):
+        moves.remove('down')
+    return moves
+
