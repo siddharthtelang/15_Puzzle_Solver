@@ -249,3 +249,25 @@ if __name__ == '__main__':
 
     final = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','0']
 
+    # parse the argument for test case
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--case', type=str, default='test5', required=False)
+    args = parser.parse_args()
+
+    toTest = test5
+    if args.case == 'test1': toTest = test1
+    elif args.case == 'test2': toTest = test2
+    elif args.case == 'test3':  toTest = test3
+    elif args.case == 'test4':  toTest = test4
+
+    # check if the test path is already at the goal state ; exit if this is the case
+    if convert2List(toTest) == final:
+        print('Already at goal state ; exit')
+        exit()
+
+    # find the path and get the traversed node list and back tracking list having details of all nodes
+    mainList, backTrack = path(toTest)
+
+    #back trace
+    track = backTrace(backTrack)
+
