@@ -121,3 +121,35 @@ def convert2List(arr):
     a = (np.array(arr)).ravel()
     return [str(i) for i in a]
 
+# define function to calculate path
+def path(inital):
+
+    toTest = convert2List(inital)
+
+    # final goal state
+    final = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','0']
+
+    # convert final goal state and inital state to array
+    final_arr = np.reshape(final, (4,4))
+    toTest_arr = np.reshape(toTest, (4,4))
+
+    # initialize queue which will store the nodes to be expanded. By default, store the test case state
+    mainQueue = Queue()
+    mainQueue.enque(toTest)
+
+    # print the initial stage - list and array
+    print('Initial Stage:')
+    mainQueue.__print__()
+    print(toTest_arr)
+    print('\n')
+
+    # define flag to set if goal reached and a count for number of expansions
+    flag, count = 0, 0
+
+    # define mainList which stores all the nodes expanded and append the test case
+    mainList = []
+    mainList.append(toTest)
+
+    # define a list to back trace the goal state. This will hold all the object of nodes traversed
+    backTrack = []
+
