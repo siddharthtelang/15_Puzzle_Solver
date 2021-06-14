@@ -115,3 +115,9 @@ def ActionMoveDown(node):
     arr = node.arr
     arr[i][j], arr[i+1][j] = arr[i+1][j], arr[i][j]
     return arr
+
+# convert to string list
+def convert2List(arr):
+    a = (np.array(arr)).ravel()
+    return [str(i) for i in a]
+
